@@ -25,7 +25,7 @@ st.text("Calculates the percentile rank of all values in a data set. Supports su
 st.text("")
 
 st.text("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" \_ { number of suppressed entries in the group } \_ \". Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
-data=st.text_input()
+data=st.text_input("")
 
 
 if data=="":
