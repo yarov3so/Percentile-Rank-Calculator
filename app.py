@@ -62,3 +62,22 @@ if set([float(int(el)) for el in set(data)-{None}])==set(data)-{None}:
     df["Value"]=df["Value"].astype(int)
 
 st.dataframe(df,hide_index=True)
+
+st.markdown("##### Find values corresponding to a given percentile rank")
+
+pr=st.text_input("Enter the required percentile rank: ")
+if pr=="":
+    st.stop()
+    
+pr=int(pr)
+
+if pr in list(df["Percentile Rank"]):
+    st.text(f"The following values have percentile rank equal to {pr}: " + ", ".join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+" .")
+else:
+    st.text("There are no values in the data set with the specified percentile rank.") 
+
+smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
+pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
+
+st.text(f"The smallest value having a percentile rank of at least {pr} is {smallest_value}.")
+st.text(f"This value has percentile rank equal to {pr_smallest_value}.")
