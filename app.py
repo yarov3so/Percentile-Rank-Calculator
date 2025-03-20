@@ -61,4 +61,4 @@ df=df.sort_values(by='Value', ascending=True).reset_index(drop=True)
 if set([float(int(el)) for el in set(data)-{None}])==set(data)-{None}:
     df["Value"]=df["Value"].astype(int)
 
-st.dataframe(df)
+st.table(df,hide_index=True)
