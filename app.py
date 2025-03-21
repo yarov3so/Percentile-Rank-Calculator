@@ -19,9 +19,8 @@ def comprehend(mystring):
             for i in range(int(re.findall(r'\d+', el)[0])):
                 data.append(None)
     return data
-
-st.markdown("*by yarov3so*")
-st.text("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
+    
+st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
 st.text("")
 
 # st.text("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" _ { number of suppressed entries in the group } _ \" . Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
@@ -81,3 +80,8 @@ smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
 pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
 
 st.text(f"The smallest value having a percentile rank of at least {pr} is {smallest_value}. This value has percentile rank equal to {pr_smallest_value}.")
+
+st.text("")
+st.markdown("""*Crafted by yarov3so*   
+<a href="https://www.buymeacoffee.com/yarov3so" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="width: 9em; height: auto; padding-top: 0.7em; padding-bottom: 1em" ></a>  
+See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_allow_html=True)
