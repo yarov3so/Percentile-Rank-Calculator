@@ -84,7 +84,7 @@ else:
 smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
 pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
 
-st.markdown(f"The smallest value having a percentile rank of at least ${pr}%$ is ${smallest_value}$. This value has percentile rank equal to ${pr_smallest_value}%$.")
+st.markdown(f"The smallest value having a percentile rank of at least ${pr}\%$ is ${smallest_value}$. This value has percentile rank equal to ${pr_smallest_value}\%$.")
 
 st.text("")
 st.markdown("""*Crafted by yarov3so*   
