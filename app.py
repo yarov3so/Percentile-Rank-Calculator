@@ -29,7 +29,13 @@ data=st.text_input("Enter all the data values in increasing order, separated by 
 
 if data=="":
     st.stop()
-
+    
+try:
+    data=comprehend(data)
+except:
+    st.warning("Incorrectly formatted input! Did you make a typo?")
+    st.stop()
+    
 data_check=[]
 for el in data:
     if el!=None:
@@ -38,13 +44,6 @@ for el in data:
 if sorted(data_check)!=data_check:
     st.warning("You did not enter your values in increasing order! Check the order and try again.")
     st.stop()
-
-try:
-    data=comprehend(data)
-except:
-    st.warning("Incorrectly formatted input! Did you make a typo?")
-    st.stop()
-
         
 st.text(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have values: "+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])
