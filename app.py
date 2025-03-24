@@ -77,7 +77,7 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
 pr=int(pr)
 
 if pr in list(df["Percentile Rank"]):
-    st.text(f"The following values have percentile rank equal to **{pr}** : &nbsp; **" + ", "**.join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+"** .")
+    st.text(f"The following values have percentile rank equal to **{pr}** : &nbsp; **" + ", ".join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+"** .")
 else:
     st.text("There are no values in the data set with the specified percentile rank.") 
 
