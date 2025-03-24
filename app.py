@@ -49,12 +49,12 @@ st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(da
 output="The explicitly stated entries have values : &nbsp; $"+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])+"$"
 st.markdown(f"{output}")
 
-df=pd.DataFrame(columns=["Value","Percentile Rank"])
+df=pd.DataFrame(columns=["Value","Percentile Rank (%)"])
 
 for entry in set(data)-{None}:
     df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data.count(entry))/len(data))]
 
-df["Percentile Rank"]=df["Percentile Rank"].astype(int)
+df["Percentile Rank (%)"]=df["Percentile Rank (%)"].astype(int)
 df=df.sort_values(by='Value', ascending=True).reset_index(drop=True)
 
 if set([float(int(el)) for el in set(data)-{None}])==set(data)-{None}:
@@ -76,13 +76,13 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
     
 pr=int(pr)
 
-if pr in list(df["Percentile Rank"]):
-    st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(df[df["Percentile Rank (\%)"]==pr]["Value"].astype(str).tolist())+"$ .")
+if pr in list(df["Percentile Rank (%)"]):
+    st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(df[df["Percentile Rank (%)"]==pr]["Value"].astype(str).tolist())+"$ .")
 else:
     st.markdown("There are no values in the data set with the specified percentile rank.") 
 
-smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
-pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
+smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Value"])
+pr_smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Percentile Rank (%)"])
 
 st.markdown(f"The smallest value having a percentile rank of at least ${pr}\%$ is ${smallest_value}$. This value has percentile rank equal to ${pr_smallest_value}\%$.")
 
