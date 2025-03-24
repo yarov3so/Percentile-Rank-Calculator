@@ -6,6 +6,11 @@ import pandas as pd
 import math
 import streamlit as st
 
+st.set_page_config(
+    page_title="Percentile Rank Calculator",
+    page_icon="MHT.png", 
+)
+
 st.title("Percentile Rank Calculator")
 
 def comprehend(mystring):
