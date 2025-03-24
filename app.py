@@ -77,14 +77,14 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
 pr=int(pr)
 
 if pr in list(df["Percentile Rank"]):
-    st.text(f"The following values have percentile rank equal to {pr}: " + ", ".join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+" .")
+    st.text(f"The following values have percentile rank equal to **{pr}** : &nbsp; **" + ", "**.join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+"** .")
 else:
     st.text("There are no values in the data set with the specified percentile rank.") 
 
 smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
 pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
 
-st.text(f"The smallest value having a percentile rank of at least {pr} is {smallest_value}. This value has percentile rank equal to {pr_smallest_value}.")
+st.text(f"The smallest value having a percentile rank of at least **{pr}** is **{smallest_value}**. This value has percentile rank equal to **{pr_smallest_value}**.")
 
 st.text("")
 st.markdown("""*Crafted by yarov3so*   
