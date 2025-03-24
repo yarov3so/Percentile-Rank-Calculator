@@ -47,7 +47,7 @@ if sorted(data_check)!=data_check:
         
 st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have values: "+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])
-st.text(f"{output}")
+st.markdown(f"${output}$")
 
 df=pd.DataFrame(columns=["Value","Percentile Rank"])
 
