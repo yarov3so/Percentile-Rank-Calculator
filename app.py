@@ -45,7 +45,7 @@ if sorted(data_check)!=data_check:
     st.warning("You did not enter your values in increasing order! Check the order and try again.")
     st.stop()
         
-st.text(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
+st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have values: "+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])
 st.text(f"{output}")
 
@@ -77,14 +77,14 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
 pr=int(pr)
 
 if pr in list(df["Percentile Rank"]):
-    st.text(f"The following values have percentile rank equal to **{pr}** : &nbsp; **" + ", ".join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+"** .")
+    st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(df[df["Percentile Rank"]==pr]["Value"].astype(str).tolist())+"$ .")
 else:
-    st.text("There are no values in the data set with the specified percentile rank.") 
+    st.markdown("There are no values in the data set with the specified percentile rank.") 
 
 smallest_value=min(df[df["Percentile Rank"]>=pr]["Value"])
 pr_smallest_value=min(df[df["Percentile Rank"]>=pr]["Percentile Rank"])
 
-st.text(f"The smallest value having a percentile rank of at least **{pr}** is **{smallest_value}**. This value has percentile rank equal to **{pr_smallest_value}**.")
+st.markdown(f"The smallest value having a percentile rank of at least ${pr}$ is ${smallest_value}$. This value has percentile rank equal to ${pr_smallest_value}$.")
 
 st.text("")
 st.markdown("""*Crafted by yarov3so*   
