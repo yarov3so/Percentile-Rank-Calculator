@@ -74,11 +74,7 @@ val=st.text_input("Enter the required value:",key="val")
 
 if val=="":
     st.stop()
-
-if val not in df["Value"]:
-    st.warning("The value you have entered does not explicitly appear in the data set!")
-    st.stop()
-
+    
 try:
     val=comprehend(val)
 except:
@@ -87,6 +83,12 @@ except:
 
 if len(val)>1:
     st.warning("Enter one single value at a time!")
+    st.stop()
+
+val=val[0]
+
+if val not in df["Value"]:
+    st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
 
 val=val[0]
