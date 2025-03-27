@@ -107,7 +107,7 @@ if val not in list(df["Value"].astype(float)):
 
 val=try_int(val)
 
-st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \{val} ) \ + \ \\frac{{1}}{{2}}( \# \ \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
+st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \ \# \ \\text{{entries in total}} }} \\right) \cdot 100 = $")
 
 
 
