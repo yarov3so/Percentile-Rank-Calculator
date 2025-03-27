@@ -84,7 +84,7 @@ except:
 if len(val)>1:
     st.warning("Enter one single value at a time!")
     st.stop()
-st.dataframe(df["Value"])
+st.dataframe(df["Value"][0])
 val=val[0]
 st.markdown(f"{val}")
 
