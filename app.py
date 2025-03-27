@@ -84,11 +84,8 @@ except:
 if len(val)>1:
     st.warning("Enter one single value at a time!")
     st.stop()
-st.dataframe(df["Value"][0])
-val=val[0]
-st.markdown(f"{val}")
 
-if val not in df["Value"]:
+if val not in list(df["Value"]):
     st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
 
