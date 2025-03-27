@@ -68,9 +68,9 @@ if set([float(int(el)) for el in set(data)-{None}])==set(data)-{None}:
 st.dataframe(df,hide_index=True)
 st.text("")
 
-st.markdown("##### Calculate the percentile rank of any value appearing in the data set explicitly",key="val")
+st.markdown("##### Calculate the percentile rank of any value appearing in the data set explicitly")
 
-val=st.text_input("Enter the required value:")
+val=st.text_input("Enter the required value:",key="val")
 
 if val=="":
     st.stop()
