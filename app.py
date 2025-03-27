@@ -93,6 +93,8 @@ if val not in df["Value"]:
 
 val=val[0]
 
+st.markdown(f"{val}")
+
 st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ (\# \\text{{entries}} < {val} ) + \\frac{{1}}{{2}}(\# \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
 
 
