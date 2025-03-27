@@ -86,14 +86,11 @@ if len(val)>1:
     st.stop()
 
 val=val[0]
+st.markdown(f"{val}")
 
 if val not in df["Value"]:
     st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
-
-val=val[0]
-
-st.markdown(f"{val}")
 
 st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ (\# \\text{{entries}} < {val} ) + \\frac{{1}}{{2}}(\# \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
 
