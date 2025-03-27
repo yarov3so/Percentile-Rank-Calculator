@@ -24,6 +24,20 @@ def comprehend(mystring):
             for i in range(int(re.findall(r'\d+', el)[0])):
                 data.append(None)
     return data
+
+def try_int(num):
+    
+    num_int=None
+    try:
+        num_int=int(num)
+    except:
+        return num
+    if num==num_int:
+        return num_int
+    elif (num<=0.1 and num>=0) or (num>=-0.1 and num<=0):
+        return "{:.2g}".format(float(num))
+    else:
+        return round(float(num),2)
     
 st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
 
@@ -91,7 +105,9 @@ if val not in list(df["Value"].astype(float)):
     st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
 
-st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ (\# \\text{{entries}} < {val} ) + \\frac{{1}}{{2}}(\# \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
+val=try_int(val)
+
+st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \{val} ) \ + \ \\frac{{1}}{{2}}( \# \ \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
 
 
 
