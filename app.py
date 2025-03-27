@@ -68,6 +68,34 @@ if set([float(int(el)) for el in set(data)-{None}])==set(data)-{None}:
 st.dataframe(df,hide_index=True)
 st.text("")
 
+st.markdown("##### Calculate the percentile rank of any value appearing in the data set explicitly",key="val")
+
+val=st.text_input("Enter the required value:")
+
+if val=="":
+    st.stop()
+
+if val not in df["Value"]:
+    st.warning("The value you have entered does not explicitly appear in the data set!")
+    st.stop()
+
+try:
+    val=comprehend(val)
+except:
+    st.warning("Incorrectly formatted input! Did you make a typo?")
+    st.stop()
+
+if len(val)>1:
+    st.warning("Enter one single value at a time!")
+    st.stop()
+
+val=val[0]
+
+st.markdown(f"$ \\text{{PR}} ({val}) = \\left( \\frac{{ (\# \\text{{entries}} < {val} ) + \\frac{{1}}{{2}}(\# \\text{{entries}} = {val} ) }}{{ \# \\text{{entries in total}} }} \\right) \cdot 100 = $")
+
+
+
+
 st.markdown("##### Find values corresponding to a given percentile rank")
 
 pr=st.text_input("Enter the required percentile rank: ")
