@@ -105,13 +105,13 @@ if val!="":
             if val not in list(df["Value"].astype(float)):
                 st.warning("The value you have entered does not explicitly appear in the data set! As such, its percentile rank cannot be calculated.")
             else:
-                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))} \%}}$")
+                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
         except:
             pass
             
 st.markdown("##### Find values corresponding to a given percentile rank")
 
-pr=st.text_input("Enter the required percentile rank (without the \"%\" symbol): ",key="pr")
+pr=st.text_input("Enter the required percentile rank: ",key="pr")
 
 if pr=="":
     st.text("")
@@ -120,7 +120,7 @@ if pr=="":
 See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_allow_html=True)
     st.stop()
     
-pr=int(pr)
+pr=int(pr.replace("%",""))
 
 if pr in list(df["Percentile Rank (%)"]):
     st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(df[df["Percentile Rank (%)"]==pr]["Value"].astype(str).tolist())+"$ .")
