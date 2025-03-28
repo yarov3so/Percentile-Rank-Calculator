@@ -33,7 +33,7 @@ def comprehend(mystring):
     data =[]
     for el in data_list:
         try:
-            data.append(try_int(el)) #float
+            data.append(float(el)) #float
         except: 
             for i in range(int(re.findall(r'\d+', el)[0])):
                 data.append(None)
@@ -95,14 +95,15 @@ except:
 if len(val)>1:
     st.warning("Enter one single value at a time!")
     st.stop()
-    
+
+val_flt=val
 val=try_int(val[0])
 
 if val not in list(df["Value"].astype(float)):
     st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
 
-st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(entry)} \ + \ \\frac{{1}}{{2}}( \ {data.count(entry)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] $")
+st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] $")
 
 
 st.markdown("##### Find values corresponding to a given percentile rank")
