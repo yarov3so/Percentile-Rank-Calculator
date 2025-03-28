@@ -96,7 +96,7 @@ if len(val)>1:
     st.warning("Enter one single value at a time!")
     st.stop()
 
-val_flt=val
+val_flt=val[0]
 val=try_int(val[0])
 
 if val not in list(df["Value"].astype(float)):
