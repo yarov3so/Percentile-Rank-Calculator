@@ -13,18 +13,6 @@ st.set_page_config(
 
 st.title("Percentile Rank Calculator")
 
-def comprehend(mystring):
-    mystring=mystring.replace(" ", "")
-    data_list=mystring.split(",")
-    data =[]
-    for el in data_list:
-        try:
-            data.append(float(el))
-        except: 
-            for i in range(int(re.findall(r'\d+', el)[0])):
-                data.append(None)
-    return data
-
 def try_int(num):
     
     num_int=None
@@ -38,17 +26,26 @@ def try_int(num):
         return "{:.2g}".format(float(num))
     else:
         return round(float(num),2)
-    
-st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
 
+def comprehend(mystring):
+    mystring=mystring.replace(" ", "")
+    data_list=mystring.split(",")
+    data =[]
+    for el in data_list:
+        try:
+            data.append(try_int(el)) #float
+        except: 
+            for i in range(int(re.findall(r'\d+', el)[0])):
+                data.append(None)
+    return data
+  
+st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
 
 # st.text("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" _ { number of suppressed entries in the group } _ \" . Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
 data=st.text_input("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" \_ { number of suppressed entries in the group } \_ \" . Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
 
-
 if data=="":
     st.stop()
-    
 try:
     data=comprehend(data)
 except:
@@ -99,17 +96,13 @@ if len(val)>1:
     st.warning("Enter one single value at a time!")
     st.stop()
     
-val=val[0]
+val=try_int(val[0])
 
 if val not in list(df["Value"].astype(float)):
     st.warning("The value you have entered does not explicitly appear in the data set!")
     st.stop()
 
-val=try_int(val)
-
-st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \\right] = $")
-
-
+st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(entry)} \ + \ \\frac{{1}}{{2}}( \ {data.count(entry)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] $")
 
 
 st.markdown("##### Find values corresponding to a given percentile rank")
