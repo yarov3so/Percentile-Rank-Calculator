@@ -70,6 +70,7 @@ df=pd.DataFrame(columns=["Value","Percentile Rank (%)"])
 for entry in set(data)-{None}:
     df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data.count(entry))/len(data))]
 
+
 df["Percentile Rank (%)"]=df["Percentile Rank (%)"].astype(int)
 df=df.sort_values(by='Value', ascending=True).reset_index(drop=True)
 
@@ -106,7 +107,7 @@ if val!="":
                 st.warning("The value you have entered does not explicitly appear in the data set! As such, its percentile rank cannot be calculated.")
             else:
                 st.markdown(f"{data_check}")
-                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
+                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ { 2+data[data.index(val_flt):][1:].index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
         except:
             pass
             
