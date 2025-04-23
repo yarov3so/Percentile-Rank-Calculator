@@ -48,7 +48,7 @@ def comprehend_2(mystring):
             data.append(float(el)) #float
         except: 
             for i in range(int(re.findall(r'\d+', el)[0])):
-                data.append(float(el))
+                data.append(float(data_list[data_list.index(el) - 1]))
     return data
   
 st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
