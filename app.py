@@ -55,6 +55,7 @@ st.markdown("Calculates the percentile rank of all values in a data set. Support
 
 # st.text("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" _ { number of suppressed entries in the group } _ \" . Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
 data=st.text_input("Enter all the data values in increasing order, separated by commas. For suppressed entries, enter how many there are in each group between two underscores: \" \_ { number of suppressed entries in the group } \_ \" . Note that the values within each group of suppressed entries are assumed to be strictly between the two values that the group is sandwiched between.")
+data_copy=data
 
 if data=="":
     st.stop()
@@ -75,7 +76,7 @@ if sorted(data_check)!=data_check:
     st.stop()
 
 
-data_2=comprehend_2(data)
+data_2=comprehend_2(data_copy)
         
 st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have unique values : &nbsp; $"+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])+"$"
