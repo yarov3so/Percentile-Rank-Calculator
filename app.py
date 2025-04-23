@@ -142,7 +142,9 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
 pr=int(pr.replace("%",""))
 
 if pr in list(df["Percentile Rank (%)"]):
-    st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(df[df["Percentile Rank (%)"]==pr]["Value"].apply(try_int).astype(str).tolist())+"$ .")
+    lst=df[df["Percentile Rank (%)"]==pr]["Value"].tolist()
+    lst=[str(try_int(num)) for num in lst[:]]
+    st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(lst)+"$ .")
 else:
     st.markdown("There are no values in the data set with the specified percentile rank.") 
 
