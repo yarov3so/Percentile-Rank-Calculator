@@ -33,7 +33,7 @@ def comprehend(mystring):
     data =[]
     for el in data_list:
         try:
-            data.append(float(el)) #float
+            data.append(try_int(el)) #float
         except: 
             for i in range(int(re.findall(r'\d+', el)[0])):
                 data.append(None)
