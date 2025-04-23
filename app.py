@@ -38,6 +38,18 @@ def comprehend(mystring):
             for i in range(int(re.findall(r'\d+', el)[0])):
                 data.append(None)
     return data
+
+def comprehend_2(mystring):
+    mystring=mystring.replace(" ", "")
+    data_list=mystring.split(",")
+    data =[]
+    for el in data_list:
+        try:
+            data.append(float(el)) #float
+        except: 
+            for i in range(int(re.findall(r'\d+', el)[0])):
+                data.append(float(el))
+    return data
   
 st.markdown("Calculates the percentile rank of all values in a data set. Supports suppressed value ranges. Finds values corresponding to a given percentile rank.")
 
@@ -56,10 +68,14 @@ data_check=[]
 for el in data:
     if el!=None:
         data_check.append(el)
+    
 
 if sorted(data_check)!=data_check:
     st.warning("You did not enter your values in increasing order! Check the order and try again.")
     st.stop()
+
+
+data_2=comprehend_2(data)
         
 st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have unique values : &nbsp; $"+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])+"$"
@@ -68,7 +84,8 @@ st.markdown(f"{output}")
 df=pd.DataFrame(columns=["Value","Percentile Rank (%)"])
 
 for entry in set(data)-{None}:
-    df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data.count(entry))/len(data))]
+    
+    df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data_2.count(entry))/len(data))]  
 
 
 df["Percentile Rank (%)"]=df["Percentile Rank (%)"].astype(int)
@@ -109,7 +126,7 @@ if val!="":
                 st.markdown(f"{data}")
                 st.markdown(f"{data[data.index(val_flt):][1:]}")
                 st.markdown(f"{data[data.index(val_flt):][1:].index(val_flt)}")
-                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ { 2+data[data.index(val_flt):][1:].index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
+                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data_2.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
         except:
             pass
             
