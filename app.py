@@ -149,6 +149,7 @@ try:
     pr=int(pr.replace("%",""))
 except:
     st.warning("Percentile rank values have to be whole numbers!")
+    st.stop()
 
 marker=False
 try:
