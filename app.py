@@ -142,10 +142,10 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
     
 pr=int(pr.replace("%",""))
 
-smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Value"])
 
 marker=False
 try:
+    smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Value"])
     pr_smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Percentile Rank (%)"])
 except:
     marker=True
