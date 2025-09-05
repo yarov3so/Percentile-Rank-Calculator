@@ -30,6 +30,7 @@ def try_int(num):
 def comprehend(mystring):
     mystring=mystring.replace(" ", "")
     data_list=mystring.split(",")
+    st.text(data_list)
     data =[]
     for i in len(data_list):
         try:
