@@ -31,12 +31,16 @@ def comprehend(mystring):
     mystring=mystring.replace(" ", "")
     data_list=mystring.split(",")
     data =[]
-    for el in data_list:
+    for i in len(data_list):
         try:
-            data.append(float(el)) #float
+            data.append(float(data_list[i])) #float
         except: 
-            for i in range(int(re.findall(r'\d+', el)[0])):
-                data.append(None)
+            if i<len(data_list)-1 and i>1 and data_list[i+1]==data_list[i-1]:
+                for j in range(int(re.findall(r'\d+', data_list[i])[0])):
+                    data.append(data_list[i-1])
+            else:
+                for j in range(int(re.findall(r'\d+', data_list[i])[0])):
+                    data.append(None)
     return data
 
 def comprehend_2(mystring):
