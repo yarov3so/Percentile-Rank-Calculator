@@ -30,9 +30,8 @@ def try_int(num):
 def comprehend(mystring):
     mystring=mystring.replace(" ", "")
     data_list=mystring.split(",")
-    st.text(data_list)
     data =[]
-    for i in len(data_list):
+    for i in range(len(data_list)):
         try:
             data.append(float(data_list[i])) #float
         except: 
@@ -65,12 +64,11 @@ data_copy=data
 if data=="":
     st.stop()
 
-data=comprehend(data)
-# try:
-#     data=comprehend(data)
-# except:
-#     st.warning("Incorrectly formatted input! Did you make a typo?")
-#     st.stop()
+try:
+    data=comprehend(data)
+except:
+    st.warning("Incorrectly formatted input! Did you make a typo?")
+    st.stop()
     
 data_check=[]
 for el in data:
