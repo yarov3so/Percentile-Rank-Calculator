@@ -76,7 +76,7 @@ if sorted(data_check)!=data_check:
     st.stop()
 
 
-data_2=comprehend(data_copy) #comprehend_2
+#data_2=comprehend(data_copy) #comprehend_2
         
 st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have unique values : &nbsp; $"+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])+"$"
@@ -84,10 +84,10 @@ st.markdown(f"{output}")
 
 df=pd.DataFrame(columns=["Value","Percentile Rank (%)"])
 
-st.text(data_2)
+
 for entry in set(data)-{None}:
     
-    df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data_2.count(entry))/len(data))]  
+    df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data.count(entry))/len(data))]  
 
 #st.markdown(df)
 df["Percentile Rank (%)"]=df["Percentile Rank (%)"].astype(int)
@@ -125,7 +125,7 @@ if val!="":
             if val not in list(df["Value"].astype(float)):
                 st.warning("The value you have entered does not explicitly appear in the data set! As such, its percentile rank cannot be calculated.")
             else:
-                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data_2.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data_2.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data_2.count(val_flt))/len(data)))}\%}}$")
+                st.markdown(f"$ \\text{{PR}} ({val}) = \\left[ \ \\left( \\frac{{ ( \ \# \ \\text{{entries}} \ < \ {val} \ ) \ + \ \\frac{{1}}{{2}}( \ \# \ \\text{{entries}} \ = \ {val} \ ) }}{{ \# \ \\text{{entries in total}} }} \\right) \cdot 100 \ \\right] = \\left[ \ \\left( \\frac{{ {data.index(val_flt)} \ + \ \\frac{{1}}{{2}}( \ {data.count(val_flt)} \ ) }}{{ {len(data)} }} \\right) \cdot 100 \ \\right] = \\left[ {try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data))} \\right] = \\textbf{{{math.ceil(try_int(100*(data.index(val_flt) + 0.5*data.count(val_flt))/len(data)))}\%}}$")
         except:
             pass
             
