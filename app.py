@@ -76,7 +76,7 @@ if sorted(data_check)!=data_check:
     st.stop()
 
 
-data_2=comprehend_2(data_copy)
+data_2=comprehend(data_copy) #comprehend_2
         
 st.markdown(f"Your data set has a total of {len(data)} entries, of which {len(data)-data.count(None)} are made explicit.")
 output="The explicitly stated entries have unique values : &nbsp; $"+", ".join([str(num) for num in sorted([int(el) if int(el)==el else el for el in set(data)-{None}])])+"$"
@@ -88,7 +88,7 @@ for entry in set(data)-{None}:
     
     df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data_2.count(entry))/len(data))]  
 
-
+#st.markdown(df)
 df["Percentile Rank (%)"]=df["Percentile Rank (%)"].astype(int)
 df=df.sort_values(by='Value', ascending=True).reset_index(drop=True)
 
