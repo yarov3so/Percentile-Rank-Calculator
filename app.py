@@ -36,7 +36,6 @@ def comprehend(mystring):
             data.append(float(data_list[i])) #float
         except: 
             if i<len(data_list)-1 and i>1 and data_list[i+1]==data_list[i-1]:
-                st.text(data)
                 for j in range(int(re.findall(r'\d+', data_list[i])[0])):
                     data.append(float(data_list[i-1]))
             else:
@@ -64,11 +63,13 @@ data_copy=data
 
 if data=="":
     st.stop()
-try:
-    data=comprehend(data)
-except:
-    st.warning("Incorrectly formatted input! Did you make a typo?")
-    st.stop()
+
+data=comprehend(data)
+# try:
+#     data=comprehend(data)
+# except:
+#     st.warning("Incorrectly formatted input! Did you make a typo?")
+#     st.stop()
     
 data_check=[]
 for el in data:
