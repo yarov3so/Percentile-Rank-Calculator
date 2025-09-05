@@ -143,9 +143,16 @@ See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_al
 pr=int(pr.replace("%",""))
 
 smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Value"])
-pr_smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Percentile Rank (%)"])
 
-if pr in list(df["Percentile Rank (%)"]):
+marker=False
+try:
+    pr_smallest_value=min(df[df["Percentile Rank (%)"]>=pr]["Percentile Rank (%)"])
+except:
+    marker=True
+
+if marker=False:
+    st.markdown("There are no values in the data set with the specified percentile rank.") 
+elif pr in list(df["Percentile Rank (%)"]):
     lst=df[df["Percentile Rank (%)"]==pr]["Value"].tolist()
     lst=[str(try_int(num)) for num in lst[:]]
     st.markdown(f"The following values have percentile rank equal to ${pr}$ : &nbsp; $" + ", ".join(lst)+"$ .")
