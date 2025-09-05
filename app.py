@@ -37,7 +37,7 @@ def comprehend(mystring):
         except: 
             if i<len(data_list)-1 and i>1 and data_list[i+1]==data_list[i-1]:
                 for j in range(int(re.findall(r'\d+', data_list[i])[0])):
-                    data.append(data_list[i-1])
+                    data.append(float(data_list[i-1]))
             else:
                 for j in range(int(re.findall(r'\d+', data_list[i])[0])):
                     data.append(None)
