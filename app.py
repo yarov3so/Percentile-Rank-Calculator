@@ -150,7 +150,7 @@ try:
 except:
     marker=True
 
-if marker=False:
+if marker==False:
     st.markdown("There are no values in the data set with the specified percentile rank.") 
 elif pr in list(df["Percentile Rank (%)"]):
     lst=df[df["Percentile Rank (%)"]==pr]["Value"].tolist()
