@@ -140,8 +140,10 @@ if pr=="":
 See my other [Math Help Tools](https://mathh3lptools.streamlit.app)""",unsafe_allow_html=True)
     st.stop()
     
-pr=int(pr.replace("%",""))
-
+try:
+    pr=int(pr.replace("%",""))
+except:
+    st.warning("Percentile rank values have to be whole numbers!")
 
 marker=False
 try:
