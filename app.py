@@ -151,7 +151,7 @@ except:
     marker=True
 
 if marker==True:
-    st.markdown("There are no values in the data set with the specified percentile rank.") 
+    st.markdown("There are no values in the data set with the specified percentile rank or higher.") 
 elif pr in list(df["Percentile Rank (%)"]):
     lst=df[df["Percentile Rank (%)"]==pr]["Value"].tolist()
     lst=[str(try_int(num)) for num in lst[:]]
