@@ -84,6 +84,7 @@ st.markdown(f"{output}")
 
 df=pd.DataFrame(columns=["Value","Percentile Rank (%)"])
 
+st.text(data_2)
 for entry in set(data)-{None}:
     
     df.loc[len(df)]=[entry,math.ceil(100*(data.index(entry) + 0.5*data_2.count(entry))/len(data))]  
